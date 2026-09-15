@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wanderly — Stress-Free Travel Planning & Booking Portal</title>
+  <meta name="description" content="Plan a peaceful, relaxing journey. Book flights, tours, transfers, eSIMs, car rentals, insurance and more through globally renowned platforms — all in one place." />
+  <link rel="canonical" href="https://www.wanderly.travel/" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Wanderly" />
+  <meta property="og:title" content="Wanderly — Stress-Free Travel Planning & Booking Portal" />
+  <meta property="og:description" content="Plan a peaceful, relaxing journey. Book flights, tours, transfers, eSIMs, car rentals, insurance and more through globally renowned platforms — all in one place." />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" />
+  <meta property="og:url" content="https://www.wanderly.travel/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wanderly — Stress-Free Travel Planning & Booking Portal" />
+  <meta name="twitter:description" content="Plan your entire trip — flights, tours, transfers, eSIMs, car rentals, and insurance — in one calm, seamless place." />
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#075985" />
+
+  <!-- Structured data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Wanderly",
+    "description": "All-in-one travel planning and booking portal covering flights, tours, transfers, eSIMs, car rentals, and travel insurance.",
+    "url": "https://www.wanderly.travel/",
+    "email": "hello@wanderly.travel",
+    "telephone": "+1-800-555-8747"
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ocean:  { DEFAULT: '#0e7490', deep: '#075985', light: '#22d3ee' },
+            gold:   { DEFAULT: '#d4a017', warm: '#f5b301', soft: '#fde68a' },
+            sand:   '#faf8f3'
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body: ['"Inter"', 'system-ui', 'sans-serif']
+          },
+          boxShadow: {
+            soft: '0 10px 40px -12px rgba(7, 89, 133, 0.25)',
+            card: '0 8px 30px -10px rgba(14, 116, 144, 0.28)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+
+    /* Respect users who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .service-card, .card-img, .btn-book::after, #mobileMenu, #toTop { transition: none !important; }
+    }
+
+    /* Hero gradient overlay */
+    .hero-overlay {
+      background: linear-gradient(120deg, rgba(7,89,133,0.85) 0%, rgba(14,116,144,0.6) 45%, rgba(2,44,73,0.75) 100%);
+    }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Card hover lift */
+    .service-card { transition: transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s ease; }
+    .service-card:hover { transform: translateY(-8px); }
+    .service-card:hover .card-img { transform: scale(1.08); }
+    .card-img { transition: transform .6s ease; }
+
+    /* Gradient text */
+    .text-gradient {
+      background: linear-gradient(90deg, #f5b301, #fde68a);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    /* Shine on buttons */
+    .btn-book { position: relative; overflow: hidden; }
+    .btn-book::after {
+      content:''; position:absolute; top:0; left:-120%; width:60%; height:100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
+      transform: skewX(-20deg); transition: left .6s ease;
+    }
+    .btn-book:hover::after { left: 140%; }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-thumb { background: #0e7490; border-radius: 8px; }
+
+    /* Visible, consistent focus states for keyboard users */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid #f5b301;
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    /* Skip link: hidden until focused */
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 1rem;
+      z-index: 100;
+      background: #f5b301;
+      color: #0f172a;
+      font-weight: 600;
+      padding: 0.75rem 1.25rem;
+      border-radius: 9999px;
+    }
+    .skip-link:focus {
+      left: 1rem;
+    }
+
+    /* Smooth mobile menu: animate height/opacity instead of display toggle */
+    #mobileMenu {
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      overflow: hidden;
+      transition: grid-template-rows .35s ease, opacity .3s ease;
+    }
+    #mobileMenu.open {
+      grid-template-rows: 1fr;
+      opacity: 1;
+    }
+    #mobileMenu > div { min-height: 0; }
+  </style>
+</head>
+
+<body class="bg-sand text-slate-800 antialiased">
+
+  <!-- Skip link for keyboard/screen-reader users -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ============== NAVBAR ============== -->
+  <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between h-20" aria-label="Primary">
+      <a href="#home" class="flex items-center gap-2 font-display text-2xl font-bold text-white transition-colors" id="brand">
+        <svg class="w-8 h-8 text-gold-warm" fill="currentColor" viewBox="0 0 24 24" role="img" aria-hidden="true" focusable="false"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z"/></svg>
+        <span>Wanderly</span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-8 text-sm font-medium text-white/90" id="navlinks">
+        <li><a href="#home" class="hover:text-gold-warm transition">Home</a></li>
+        <li><a href="#services" class="hover:text-gold-warm transition">Services</a></li>
+        <li><a href="#why" class="hover:text-gold-warm transition">Why Us</a></li>
+        <li><a href="#contact" class="hover:text-gold-warm transition">Contact</a></li>
+      </ul>
+
+      <a href="#services" class="hidden lg:inline-flex items-center gap-2 bg-gold-warm hover:bg-gold text-slate-900 font-semibold px-5 py-2.5 rounded-full transition shadow-lg">
+        Explore Services
+      </a>
+
+      <!-- Mobile toggle -->
+      <button id="menuBtn" class="lg:hidden text-white p-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg id="menuIconOpen" class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        <svg id="menuIconClose" class="w-7 h-7 hidden" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="lg:hidden bg-ocean-deep/95 backdrop-blur border-t border-white/10">
+      <div class="px-6 py-4 flex flex-col gap-3 text-white font-medium">
+        <a href="#home" class="py-2 border-b border-white/10">Home</a>
+        <a href="#services" class="py-2 border-b border-white/10">Services</a>
+        <a href="#why" class="py-2 border-b border-white/10">Why Us</a>
+        <a href="#contact" class="py-2">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+  <!-- ============== HERO ============== -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden" aria-labelledby="hero-heading">
+    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80"
+         alt="A calm tropical beach at golden hour, with turquoise water and palm trees" class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <div class="relative z-10 text-center px-5 max-w-4xl mx-auto pt-24 pb-16">
+      <span class="inline-block mb-5 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur text-white text-xs sm:text-sm font-medium tracking-wide border border-white/20 reveal">
+        ✈️ Your all-in-one travel companion
+      </span>
+      <h1 id="hero-heading" class="font-display text-4xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight reveal">
+        Travel Made <span class="text-gradient">Effortless</span><br class="hidden sm:block"> & Peaceful
+      </h1>
+      <p class="mt-6 text-lg sm:text-xl text-white/90 max-w-2xl mx-auto reveal">
+        From flights and stays to tours, transfers, and travel insurance — plan your entire journey in one calm, seamless place. Relax, we've got every detail covered.
+      </p>
+      <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+        <a href="#services" class="btn-book bg-gold-warm hover:bg-gold text-slate-900 font-bold px-8 py-4 rounded-full shadow-soft transition text-lg w-full sm:w-auto">
+          Start Planning
+        </a>
+        <a href="#why" class="bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 text-white font-semibold px-8 py-4 rounded-full transition w-full sm:w-auto">
+          Why Travelers Love Us
+        </a>
+      </div>
+
+      <!-- Trust badges -->
+      <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/80 text-sm reveal">
+        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-gold-warm" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg> Trusted global partners</li>
+        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-gold-warm" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Secure booking</li>
+        <li class="flex items-center gap-2"><svg class="w-5 h-5 text-gold-warm" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/></svg> 24/7 support</li>
+      </ul>
+    </div>
+
+    <!-- Scroll indicator -->
+    <a href="#services" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/70 animate-bounce z-10" aria-label="Scroll to services">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </a>
+  </section>
+
+  <!-- ============== SERVICES ============== -->
+  <section id="services" class="py-20 lg:py-28 max-w-7xl mx-auto px-5 lg:px-8" aria-labelledby="services-heading">
+    <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+      <span class="text-ocean font-semibold tracking-wide uppercase text-sm">Everything You Need</span>
+      <h2 id="services-heading" class="font-display text-3xl sm:text-5xl font-bold text-slate-900 mt-3">Our Travel Services</h2>
+      <p class="mt-4 text-slate-600 text-lg">
+        Handpicked, world-class platforms for every part of your trip. Book with confidence and travel with peace of mind.
+      </p>
+    </div>
+
+    <div id="cardGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      <!-- Cards injected via JS -->
+    </div>
+  </section>
+
+  <!-- ============== WHY US ============== -->
+  <section id="why" class="bg-ocean-deep text-white py-20 lg:py-28" aria-labelledby="why-heading">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <span class="text-gold-warm font-semibold tracking-wide uppercase text-sm">The Wanderly Promise</span>
+        <h2 id="why-heading" class="font-display text-3xl sm:text-5xl font-bold mt-3">Why Travel With Us</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="reveal text-center p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
+          <div class="w-14 h-14 mx-auto rounded-xl bg-gold-warm/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-gold-warm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">All-in-One Portal</h3>
+          <p class="text-white/70 text-sm">Every travel service you need, curated in a single, seamless place.</p>
+        </div>
+        <div class="reveal text-center p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
+          <div class="w-14 h-14 mx-auto rounded-xl bg-gold-warm/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-gold-warm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Secure & Trusted</h3>
+          <p class="text-white/70 text-sm">Partnered only with globally renowned, verified booking platforms.</p>
+        </div>
+        <div class="reveal text-center p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
+          <div class="w-14 h-14 mx-auto rounded-xl bg-gold-warm/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-gold-warm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6l9-4 9 4M4 10v10a1 1 0 001 1h3m10-11v11a1 1 0 01-1 1h-3m-6 0h6m-6 0v-5a1 1 0 011-1h4a1 1 0 011 1v5"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Best Value</h3>
+          <p class="text-white/70 text-sm">Compare and book at competitive prices with no hidden fees.</p>
+        </div>
+        <div class="reveal text-center p-6 rounded-2xl bg-white/5 backdrop-blur border border-white/10">
+          <div class="w-14 h-14 mx-auto rounded-xl bg-gold-warm/20 flex items-center justify-center mb-4">
+            <svg class="w-7 h-7 text-gold-warm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M18.364 5.636a9 9 0 010 12.728m0 0l-2.829-2.829m2.829 2.829L21 21M15.536 8.464a5 5 0 010 7.072m0 0l-2.829-2.829m-4.243 2.829a4.978 4.978 0 01-1.414-2.83m-1.414 5.658a9 9 0 01-2.167-9.238m7.824-.567L11 3"/></svg>
+          </div>
+          <h3 class="font-semibold text-lg mb-2">Peace of Mind</h3>
+          <p class="text-white/70 text-sm">Relaxed, stress-free planning so you can focus on the adventure.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== CTA BANNER ============== -->
+  <section class="relative py-20 lg:py-24 overflow-hidden" aria-labelledby="cta-heading">
+    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1920&q=80" alt="A calm mountain lake surrounded by pine forest and peaks" class="absolute inset-0 w-full h-full object-cover"/>
+    <div class="absolute inset-0 bg-ocean-deep/80"></div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center px-5 reveal">
+      <h2 id="cta-heading" class="font-display text-3xl sm:text-5xl font-bold text-white">Your Next Journey Awaits</h2>
+      <p class="mt-4 text-white/85 text-lg">For your comfort and a peaceful, relaxing journey, book through globally renowned platforms — all gathered here for you.</p>
+      <a href="#services" class="btn-book inline-block mt-8 bg-gold-warm hover:bg-gold text-slate-900 font-bold px-9 py-4 rounded-full shadow-soft transition text-lg">
+        Browse All Services
+      </a>
+    </div>
+  </section>
+  </main>
+
+  <!-- ============== FOOTER / CONTACT ============== -->
+  <footer id="contact" class="bg-slate-900 text-white/80 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div class="md:col-span-2">
+        <a href="#home" class="flex items-center gap-2 font-display text-2xl font-bold text-white mb-4">
+          <svg class="w-8 h-8 text-gold-warm" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 16v-2l-8-5V3.5A1.5 1.5 0 0 0 11.5 2 1.5 1.5 0 0 0 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5L21 16z"/></svg>
+          <span>Wanderly</span>
+        </a>
+        <p class="text-sm max-w-md leading-relaxed">
+          Wanderly is your trusted all-in-one travel portal. We connect you with the world's leading booking platforms so you can plan every part of your trip with confidence, comfort, and complete peace of mind.
+        </p>
+        <p class="mt-4 text-xs text-white/50">Disclosure: Some links on this site are affiliate links. We may earn a commission at no extra cost to you.</p>
+      </div>
+      <nav aria-label="Footer">
+        <h4 class="text-white font-semibold mb-4">Quick Links</h4>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#home" class="hover:text-gold-warm transition">Home</a></li>
+          <li><a href="#services" class="hover:text-gold-warm transition">Services</a></li>
+          <li><a href="#why" class="hover:text-gold-warm transition">Why Us</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h4 class="text-white font-semibold mb-4">Get in Touch</h4>
+        <ul class="space-y-2 text-sm">
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-gold-warm" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/></svg> <a href="mailto:hello@wanderly.travel" class="hover:text-gold-warm transition">hello@wanderly.travel</a></li>
+          <li class="flex items-center gap-2"><svg class="w-4 h-4 text-gold-warm" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/></svg> <a href="tel:+18005558747" class="hover:text-gold-warm transition">+1 (800) 555-TRIP</a></li>
+        </ul>
+        <div class="flex gap-3 mt-4">
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-warm hover:text-slate-900 flex items-center justify-center transition" aria-label="Wanderly on Facebook"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-2.9h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6v1.8H16l-.4 2.9h-2.1v7A10 10 0 0022 12z"/></svg></a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-warm hover:text-slate-900 flex items-center justify-center transition" aria-label="Wanderly on Instagram"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .4 1.4.9.5.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.4 1-.9 1.4-.4.5-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.4-1.4-.9-.5-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.4-1 .9-1.4.4-.5.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 3.4a6.4 6.4 0 100 12.8 6.4 6.4 0 000-12.8zm0 10.6a4.2 4.2 0 110-8.4 4.2 4.2 0 010 8.4zm6.6-10.8a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/></svg></a>
+          <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-gold-warm hover:text-slate-900 flex items-center justify-center transition" aria-label="Wanderly on Twitter/X"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 mt-12 pt-6 border-t border-white/10 text-center text-sm text-white/50">
+      © <span id="year"></span> Wanderly Travel Portal. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- ============== BACK TO TOP ============== -->
+  <button id="toTop" class="fixed bottom-6 right-6 z-50 bg-ocean hover:bg-ocean-deep text-white w-12 h-12 rounded-full shadow-soft flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300" aria-label="Back to top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg>
+  </button>
+
+  <!-- ============== JAVASCRIPT ============== -->
+  <script>
+    /* ---------- Service data (13 services, exact affiliate links) ---------- */
+    const PROMO = "For your comfort and a peaceful, relaxing journey, book through this globally renowned platform.";
+
+    const services = [
+      { title: "Attractions, Tours & Activities", brand: "Klook", tag: "Experiences",
+        img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=137&marker=725624&p=4110&sub_id=Trip.com&trs=526042&u=https%3A%2F%2Fklook.com" },
+      { title: "eSIM & Mobile Data", brand: "Yesim", tag: "Connectivity",
+        img: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=224&marker=725624&p=5998&trs=526042&u=https%3A%2F%2Fyesim.tech" },
+      { title: "Airport Taxi & Transfers", brand: "Kiwitaxi", tag: "Transfers",
+        img: "https://images.unsplash.com/photo-1549194388-f61be84a6e9e?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=1&marker=725624&p=647&trs=526042&u=https%3A%2F%2Fkiwitaxi.com" },
+      { title: "Car Rental", brand: "Localrent", tag: "On the Road",
+        img: "https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=87&marker=725624&p=2043&trs=526042&u=https%3A%2F%2Flocalrent.com%2Fen" },
+      { title: "Private Airport Pickups", brand: "Welcome Pickups", tag: "Transfers",
+        img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=627&marker=725624&p=8919&trs=526042&u=https%3A%2F%2Fwelcomepickups.com" },
+      { title: "Museum & Attraction Tickets", brand: "Tiqets", tag: "Experiences",
+        img: "https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=89&marker=725624&p=2074&trs=526042&u=https%3A%2F%2Ftiqets.com" },
+      { title: "Cheap Flights", brand: "Aviasales", tag: "Flights",
+        img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=100&marker=725624&p=4114&trs=526042&u=https%3A%2F%2Faviasales.com" },
+      { title: "Tours & Excursions", brand: "KKday", tag: "Experiences",
+        img: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=633&marker=725624&p=9074&trs=526042&u=https%3A%2F%2Fkkday.com" },
+      { title: "Audio Guides & City Trips", brand: "WeGoTrip", tag: "Experiences",
+        img: "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=150&marker=725624&p=4487&trs=526042&u=https%3A%2F%2Fwegotrip.com" },
+      { title: "Travel Insurance", brand: "EKTA", tag: "Protection",
+        img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=225&marker=725624&p=5869&trs=526042&u=https%3A%2F%2Fektatraveling.com" },
+      { title: "Bike & Motorcycle Rental", brand: "BikesBooking", tag: "On the Road",
+        img: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=57&marker=725624&p=1767&trs=526042&u=https%3A%2F%2Fbikesbooking.com" },
+      { title: "Global Car Rental", brand: "EconomyBookings", tag: "On the Road",
+        img: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=10&marker=725624&p=2018&trs=526042&u=https%3A%2F%2Fwww.economybookings.com" },
+      { title: "Flight Delay & Compensation", brand: "Compensair", tag: "Protection",
+        img: "https://images.unsplash.com/photo-1521727857535-28d2047314ac?auto=format&fit=crop&w=800&q=80",
+        url: "https://tp.media/r?campaign_id=86&marker=725624&p=4129&trs=526042&u=https%3A%2F%2Fcompensair.com" },
+    ];
+
+    /* ---------- Render cards ---------- */
+    const grid = document.getElementById('cardGrid');
+    grid.innerHTML = services.map(s => `
+      <article class="service-card reveal group bg-white rounded-2xl overflow-hidden shadow-card border border-slate-100 flex flex-col">
+        <div class="relative h-48 overflow-hidden">
+          <img src="${s.img}" alt="${s.title} — book via ${s.brand}" loading="lazy" width="800" height="533"
+               class="card-img w-full h-full object-cover"
+               onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80'">
+          <span class="absolute top-3 left-3 bg-ocean-deep/90 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur">${s.tag}</span>
+          <span class="absolute top-3 right-3 bg-gold-warm text-slate-900 text-xs font-bold px-3 py-1 rounded-full">${s.brand}</span>
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <h3 class="font-display text-xl font-bold text-slate-900 mb-2 group-hover:text-ocean transition">${s.title}</h3>
+          <p class="text-slate-600 text-sm leading-relaxed flex-grow">${PROMO}</p>
+          <a href="${s.url}" target="_blank" rel="noopener nofollow sponsored"
+             aria-label="Book ${s.title} with ${s.brand} (opens in a new tab)"
+             class="btn-book mt-5 inline-flex items-center justify-center gap-2 bg-ocean hover:bg-ocean-deep text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 shadow-md">
+            Book Here
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </a>
+        </div>
+      </article>
+    `).join('');
+
+    /* ---------- Navbar scroll effect ---------- */
+    const nav = document.getElementById('nav');
+    const brand = document.getElementById('brand');
+    const navlinks = document.getElementById('navlinks');
+    function onScroll() {
+      if (window.scrollY > 40) {
+        nav.classList.add('bg-white', 'shadow-md');
+        brand.classList.remove('text-white'); brand.classList.add('text-ocean-deep');
+        navlinks.classList.remove('text-white/90'); navlinks.classList.add('text-slate-700');
+      } else {
+        nav.classList.remove('bg-white', 'shadow-md');
+        brand.classList.add('text-white'); brand.classList.remove('text-ocean-deep');
+        navlinks.classList.add('text-white/90'); navlinks.classList.remove('text-slate-700');
+      }
+      const toTop = document.getElementById('toTop');
+      if (window.scrollY > 400) { toTop.classList.remove('opacity-0','pointer-events-none'); }
+      else { toTop.classList.add('opacity-0','pointer-events-none'); }
+    }
+    window.addEventListener('scroll', onScroll); onScroll();
+
+    /* ---------- Mobile menu (smooth height/opacity transition + a11y state) ---------- */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuIconOpen = document.getElementById('menuIconOpen');
+    const menuIconClose = document.getElementById('menuIconClose');
+
+    function setMenuOpen(isOpen) {
+      mobileMenu.classList.toggle('open', isOpen);
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+      menuBtn.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+      menuIconOpen.classList.toggle('hidden', isOpen);
+      menuIconClose.classList.toggle('hidden', !isOpen);
+    }
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('open');
+      setMenuOpen(!isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)));
+
+    // Close on Escape for keyboard users
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        setMenuOpen(false);
+        menuBtn.focus();
+      }
+    });
+
+    /* ---------- Back to top ---------- */
+    document.getElementById('toTop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    /* ---------- Reveal on scroll ---------- */
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+
+    /* ---------- Footer year ---------- */
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
